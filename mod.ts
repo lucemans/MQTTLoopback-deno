@@ -33,9 +33,11 @@ export class MQTTLoopback {
     }
 
     private async incommingMsg(topic: string, payload: any) {
-        for (const endpoint of this.mappings) {
-            if (topic.match(endpoint.route)) {
-                endpoint.callback(topic, payload);
+        if (!(this === undefined)) {
+            for (const endpoint of this.mappings) {
+                if (topic.match(endpoint.route)) {
+                    endpoint.callback(topic, payload);
+                }
             }
         }
     }
