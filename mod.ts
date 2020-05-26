@@ -14,7 +14,7 @@ export class MQTTLoopback {
     mappings: MQTTLoopbackMapping[] = [];
     development: boolean = false;
 
-    constructor(development: boolean, options: BaseClientOptions | null = null) {
+    constructor(development: boolean, options: BaseClientOptions | undefined = undefined) {
         this.development = development;
         if (!development) {
             this.instance = new Client(options);
