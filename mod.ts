@@ -12,11 +12,11 @@ export class MQTTLoopback {
 
     instance: Client | null;
     mappings: MQTTLoopbackMapping[] = [];
-    development: boolean = false;
+    production: boolean = false;
 
-    constructor(development: boolean, options: BaseClientOptions | undefined = undefined) {
-        this.development = development;
-        if (!development) {
+    constructor(production: boolean, options: BaseClientOptions | undefined = undefined) {
+        this.production = production;
+        if (production) {
             this.instance = new Client(options);
         } else {
             this.instance = null;
@@ -24,7 +24,7 @@ export class MQTTLoopback {
     }
 
     async connect() {
-        if (!this.development) {
+        if (this.production) {
             await this.instance?.connect();
             await this.instance?.subscribe('#');
 
@@ -32,7 +32,7 @@ export class MQTTLoopback {
         }
     }
 
-    async incommingMsg(topic: any, payload: any) {
+    private async incommingMsg(topic: any, payload: any) {
         for (const endpoint of this.mappings) {
             if (topic.match(endpoint.route)) {
                 endpoint.callback(payload);
@@ -41,7 +41,7 @@ export class MQTTLoopback {
     }
 
     async publish(topic: string, input: any) {
-        if (!this.development) {
+        if (this.production) {
             this.instance?.publish(topic, input);
         } else {
             this.incommingMsg(topic, input);
