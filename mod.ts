@@ -48,7 +48,7 @@ export class MQTTLoopback {
         }
     }
 
-    async subscribe(topic: string | RegExp, callback: (payload: any) => void) {
+    async subscribe(topic: string | RegExp, callback: MQTTLoopbackCallback) {
         this.mappings.push({
             route: topic,
             callback
