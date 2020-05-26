@@ -1,4 +1,5 @@
-import { Client, BaseClientOptions } from 'https://denopkg.com/jdiamond/MQTT.ts/mod.ts';
+import { Client } from 'https://denopkg.com/jdiamond/MQTT.ts/mod.ts';
+import { BaseClientOptions } from 'https://raw.githubusercontent.com/jdiamond/MQTT.ts/master/client/base.ts';
 
 export interface MQTTLoopbackMapping {
     route: string | RegExp;
@@ -7,7 +8,7 @@ export interface MQTTLoopbackMapping {
 
 export interface MQTTLoopbackCallback { (payload: any): void };
 
-export default class MQTTLoopback {
+export class MQTTLoopback {
 
     instance: Client | null;
     mappings: MQTTLoopbackMapping[] = [];
