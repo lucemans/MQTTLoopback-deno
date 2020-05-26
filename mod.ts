@@ -6,7 +6,7 @@ export interface MQTTLoopbackMapping {
     callback: MQTTLoopbackCallback
 }
 
-export interface MQTTLoopbackCallback { (payload: any): void };
+export interface MQTTLoopbackCallback { (topic: string, payload: any): void };
 
 export class MQTTLoopback {
 
@@ -32,10 +32,10 @@ export class MQTTLoopback {
         }
     }
 
-    private async incommingMsg(topic: any, payload: any) {
+    private async incommingMsg(topic: string, payload: any) {
         for (const endpoint of this.mappings) {
             if (topic.match(endpoint.route)) {
-                endpoint.callback(payload);
+                endpoint.callback(topic, payload);
             }
         }
     }
