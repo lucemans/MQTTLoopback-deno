@@ -1,5 +1,5 @@
-import { Client } from 'https://denopkg.com/jdiamond/MQTT.ts/mod.ts';
-import { BaseClientOptions } from 'https://raw.githubusercontent.com/jdiamond/MQTT.ts/master/client/base_client.ts';
+import { Client, ClientOptions } from 'https://denopkg.com/jdiamond/MQTT.ts/mod.ts';
+// import { ClientOptions } from 'https://raw.githubusercontent.com/jdiamond/MQTT.ts/master/client/base_client.ts';
 
 export interface MQTTLoopbackMapping {
     route: string | RegExp;
@@ -14,7 +14,7 @@ export class MQTTLoopback {
     mappings: MQTTLoopbackMapping[] = [];
     production: boolean = false;
 
-    constructor(production: boolean, options: BaseClientOptions | undefined = undefined) {
+    constructor(production: boolean, options: ClientOptions | undefined = undefined) {
         this.production = production;
         if (production) {
             this.instance = new Client(options);
