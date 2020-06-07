@@ -28,13 +28,12 @@ export class MQTTLoopback {
             await this.instance?.connect();
             await this.instance?.subscribe('#');
 
-            this.instance?.on('message', (topic: string, payload: any) => {
-                this.incommingMsg(topic, payload)
-            });
+            this.instance?.on('message', () => this.incommingMsg);
         }
     }
 
     private async incommingMsg(topic: string, payload: any) {
+        console.log(this);
         for (const endpoint of this.mappings) {
             if (topic.match(endpoint.route)) {
                 endpoint.callback(topic, payload);
