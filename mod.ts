@@ -1,5 +1,5 @@
 import { Client } from 'https://denopkg.com/jdiamond/MQTT.ts/mod.ts';
-import { BaseClientOptions } from 'https://raw.githubusercontent.com/jdiamond/MQTT.ts/master/client/base.ts';
+import { BaseClientOptions } from 'https://raw.githubusercontent.com/jdiamond/MQTT.ts/master/client/base_client.ts';
 
 export interface MQTTLoopbackMapping {
     route: string | RegExp;
